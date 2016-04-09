@@ -8,9 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * Created by user-pc on 09/04/2016.
- */
+
 public class SongAdapter extends BaseAdapter {
 
     private ArrayList<Song> songs;

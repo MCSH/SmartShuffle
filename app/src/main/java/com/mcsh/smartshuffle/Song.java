@@ -1,8 +1,6 @@
 package com.mcsh.smartshuffle;
 
-/**
- * Created by user-pc on 09/04/2016.
- */
+
 public class Song {
     private long id;
     private String title;
