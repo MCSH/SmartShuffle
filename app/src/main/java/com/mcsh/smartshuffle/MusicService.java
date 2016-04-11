@@ -1,12 +1,17 @@
 package com.mcsh.smartshuffle;
 
 import java.util.ArrayList;
+
+import android.app.Service;
 import android.content.ContentUris;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.IBinder;
 import android.os.PowerManager;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 public class MusicService extends Service implements
@@ -30,9 +35,9 @@ public class MusicService extends Service implements
         initMusicPlayer();
     }
 
+    @Nullable
     @Override
-    public IBinder onBind(Intent arg0) {
-        // TODO Auto-generated method stub
+    public IBinder onBind(Intent intent) {
         return null;
     }
 
@@ -49,6 +54,21 @@ public class MusicService extends Service implements
 
     public void setList(ArrayList<Song> theSongs){
         songs=theSongs;
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+
+    }
+
+    @Override
+    public boolean onError(MediaPlayer mp, int what, int extra) {
+        return false;
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+
     }
 
     public class MusicBinder extends Binder {
