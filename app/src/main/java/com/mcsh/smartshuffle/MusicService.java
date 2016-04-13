@@ -1,12 +1,17 @@
 package com.mcsh.smartshuffle;
 
 import java.util.ArrayList;
+
+import android.app.Service;
 import android.content.ContentUris;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.IBinder;
 import android.os.PowerManager;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 public class MusicService extends Service implements
@@ -20,6 +25,8 @@ public class MusicService extends Service implements
     //current position
     private int songPosn;
 
+    private final IBinder musicBind = new MusicBinder();
+
     public void onCreate(){
         //create the service
         super.onCreate();
@@ -31,9 +38,15 @@ public class MusicService extends Service implements
     }
 
     @Override
-    public IBinder onBind(Intent arg0) {
-        // TODO Auto-generated method stub
-        return null;
+    public IBinder onBind(Intent intent) {
+        return musicBind;
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent){
+        player.stop();
+        player.release();
+        return false;
     }
 
     public void initMusicPlayer(){
@@ -51,9 +64,54 @@ public class MusicService extends Service implements
         songs=theSongs;
     }
 
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+
+    }
+
+    @Override
+    public boolean onError(MediaPlayer mp, int what, int extra) {
+        return false;
+    }
+
+
     public class MusicBinder extends Binder {
         MusicService getService() {
             return MusicService.this;
         }
+    }
+
+    public void playSong(){
+        //play a song
+
+        player.reset();
+
+        //get song
+        Song playSong = songs.get(songPosn);
+//get id
+        long currSong = playSong.getID();
+//set uri
+        Uri trackUri = ContentUris.withAppendedId(
+                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                currSong);
+
+        try{
+            player.setDataSource(getApplicationContext(), trackUri);
+        }
+        catch(Exception e){
+            Log.e("MUSIC SERVICE", "Error setting data source", e);
+        }
+
+        player.prepareAsync();
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        //start playback
+        mp.start();
+    }
+
+    public void setSong(int songIndex){
+        songPosn=songIndex;
     }
 }
