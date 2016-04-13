@@ -47,3 +47,6 @@ gradle.properties
 SmartShuffle.iml
 gradle/
 build.gradle
+gradlew
+gradlew.bat
+settings.gradle
