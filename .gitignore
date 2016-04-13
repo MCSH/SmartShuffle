@@ -43,3 +43,7 @@ captures/
 */*.iml
 app/build.gradle
 gradle/wrapper/gradle-wrapper.properties
+gradle.properties
+SmartShuffle.iml
+gradle/
+build.gradle
