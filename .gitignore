@@ -40,3 +40,6 @@ captures/
 
 #idea
 .idea/*
+*/*.iml
+app/build.gradle
+gradle/wrapper/gradle-wrapper.properties
