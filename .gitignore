@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .gradle
 /local.properties
 /.idea/workspace.xml
@@ -7,15 +6,6 @@
 /build
 /captures
 # bUIlt application files
-=======
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
-# Built application files
 *.apk
 *.ap_
 
@@ -50,5 +40,3 @@ captures/
 
 #idea
 .idea/*
-
-*.iml
