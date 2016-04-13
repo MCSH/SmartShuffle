@@ -1,1 +1,3 @@
 # SmartShuffle
+
+Student Project
