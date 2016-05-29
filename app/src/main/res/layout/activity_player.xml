@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_player"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mcsh.smartshuffle.activity.Player"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:text="Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="169dp"
+        tools:layout_editor_absoluteY="16dp"
+        android:id="@+id/title"
+        android:textAllCaps="false"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="@+id/activity_player"
+        tools:layout_constraintLeft_creator="0"
+        app:layout_constraintTop_toTopOf="@+id/activity_player"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintTop_creator="0"
+        app:layout_constraintRight_toRightOf="@+id/activity_player"
+        tools:layout_constraintRight_creator="0" />
+
+    <TextView
+        android:text="Artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="60dp"
+        android:id="@+id/artist"
+        app:layout_constraintLeft_toLeftOf="@+id/title"
+        tools:layout_constraintLeft_creator="0"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintTop_creator="0"
+        app:layout_constraintRight_toLeftOf="@+id/title"
+        tools:layout_constraintRight_creator="0" />
+
+    <TextView
+        android:text="Album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="84dp"
+        android:id="@+id/album"
+        app:layout_constraintLeft_toLeftOf="@+id/title"
+        tools:layout_constraintLeft_creator="0"
+        app:layout_constraintTop_toBottomOf="@+id/artist"
+        android:layout_marginTop="8dp"
+        tools:layout_constraintTop_creator="0"
+        app:layout_constraintRight_toLeftOf="@+id/title"
+        tools:layout_constraintRight_creator="0" />
+
+    <Button
+        android:text="Play Pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="139dp"
+        tools:layout_editor_absoluteY="463dp"
+        android:id="@+id/play_pause"
+        app:layout_constraintLeft_toLeftOf="@+id/activity_player"
+        tools:layout_constraintLeft_creator="0"
+        app:layout_constraintRight_toRightOf="@+id/activity_player"
+        tools:layout_constraintRight_creator="0"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_player"
+        tools:layout_constraintBottom_creator="0" />
+
+    <Button
+        android:text="Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="253dp"
+        tools:layout_editor_absoluteY="463dp"
+        android:id="@+id/next"
+        app:layout_constraintLeft_toRightOf="@+id/play_pause"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        tools:layout_constraintLeft_creator="0"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_player"
+        tools:layout_constraintBottom_creator="0" />
+
+    <Button
+        android:text="Prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="43dp"
+        tools:layout_editor_absoluteY="463dp"
+        android:id="@+id/prev"
+        app:layout_constraintRight_toLeftOf="@+id/play_pause"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        tools:layout_constraintRight_creator="0"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_player"
+        tools:layout_constraintBottom_creator="0" />
+
+    <ToggleButton
+        android:text="Shuffle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="285dp"
+        tools:layout_editor_absoluteY="415dp"
+        android:id="@+id/shuffle"
+        app:layout_constraintLeft_toRightOf="@+id/play_pause"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        tools:layout_constraintLeft_creator="0"
+        app:layout_constraintBottom_toTopOf="@+id/next"
+        tools:layout_constraintBottom_creator="0"
+        android:textOff="Normal"
+        android:textOn="Shuffle"
+        android:checked="false" />
+</android.support.constraint.ConstraintLayout>
