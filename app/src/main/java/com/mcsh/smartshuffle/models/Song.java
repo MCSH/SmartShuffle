@@ -23,6 +23,7 @@ public class Song {
     @Nullable
     public String genre;
     @Column
+    @Nullable
     public int likeness;
 
     public Song(){}
@@ -64,6 +65,6 @@ public class Song {
     }
 
     public void setDefaultLikeness() {
-        //TODO
+        likeness = 50;
     }
 }

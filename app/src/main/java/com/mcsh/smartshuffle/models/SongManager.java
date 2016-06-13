@@ -21,6 +21,7 @@ public class SongManager {
 
             instance.orma = OrmaDatabase.builder(context).build();
             OrmaDatabase orma = instance.orma;
+            orma.migrate();
         }
         return instance;
     }
