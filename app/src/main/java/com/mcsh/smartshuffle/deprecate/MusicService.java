@@ -20,6 +20,7 @@ import android.app.PendingIntent;
 
 import com.mcsh.smartshuffle.R;
 import com.mcsh.smartshuffle.activity.ListActivity;
+import com.mcsh.smartshuffle.models.Song;
 
 public class MusicService extends Service implements
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,

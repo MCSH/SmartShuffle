@@ -16,8 +16,8 @@ import android.widget.MediaController;
 import com.mcsh.smartshuffle.R;
 import com.mcsh.smartshuffle.deprecate.MusicController;
 import com.mcsh.smartshuffle.deprecate.MusicService;
-import com.mcsh.smartshuffle.deprecate.Song;
-import com.mcsh.smartshuffle.deprecate.SongAdapter;
+import com.mcsh.smartshuffle.models.Song;
+import com.mcsh.smartshuffle.models.SongAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

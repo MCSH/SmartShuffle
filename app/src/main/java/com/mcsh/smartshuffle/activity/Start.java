@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.mcsh.smartshuffle.R;
-import com.mcsh.smartshuffle.deprecate.Song;
+import com.mcsh.smartshuffle.models.Song;
+import com.mcsh.smartshuffle.models.SongManager;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -33,11 +35,6 @@ public class Start extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.scan)
-    public void scan() {
-
-    }
-
     @OnClick(R.id.play)
     public void play() {
         //retrieve song info
@@ -48,18 +45,23 @@ public class Start extends AppCompatActivity {
         ArrayList<Song> songList = new ArrayList();
         if (musicCursor != null && musicCursor.moveToFirst()) {
             //get columns
-            int titleColumn = musicCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Media.TITLE);
-            int idColumn = musicCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Media._ID);
-            int artistColumn = musicCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Media.ARTIST);
+            int titleColumn = musicCursor.getColumnIndex(
+                    MediaStore.Audio.Media.TITLE);
+            int idColumn = musicCursor.getColumnIndex(
+                    MediaStore.Audio.Media._ID);
+            int artistColumn = musicCursor.getColumnIndex(
+                    MediaStore.Audio.Media.ARTIST);
+            int albumColumn = musicCursor.getColumnIndex(
+                    MediaStore.Audio.Media.ALBUM);
+
             //add songs to list
             do {
-                long thisId = musicCursor.getLong(idColumn);
-                String thisTitle = musicCursor.getString(titleColumn);
-                String thisArtist = musicCursor.getString(artistColumn);
-                songList.add(new Song(thisId, thisTitle, thisArtist));
+                long id = musicCursor.getLong(idColumn);
+                String title = musicCursor.getString(titleColumn);
+                String artist = musicCursor.getString(artistColumn);
+                String album = musicCursor.getString(albumColumn);
+                String genre = "";
+                songList.add(SongManager.getDefault().getOrCreate(id, title, artist, album, genre));
             }
             while (musicCursor.moveToNext());
         }
