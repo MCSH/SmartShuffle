@@ -26,6 +26,7 @@ public class MusicService extends Service implements
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
         MediaPlayer.OnCompletionListener {
 
+    private static final String TAG = "PLAYER";
     //media player
     private MediaPlayer player;
     //song list
@@ -89,7 +90,10 @@ public class MusicService extends Service implements
     @Override
     public void onCompletion(MediaPlayer mp) {
         if(player.getCurrentPosition()==0){
-            mp.reset();
+            //mp.reset();
+            playNext();
+        } else {
+            //mp.reset();
             playNext();
         }
     }
@@ -102,6 +106,8 @@ public class MusicService extends Service implements
 
     public void playSong() {
         //play a song
+
+        calculate();
 
         player.reset();
 
@@ -208,5 +214,11 @@ public class MusicService extends Service implements
     @Override
     public void onDestroy() {
         stopForeground(true);
+    }
+
+    public void calculate(){
+        //TODO
+        Log.d(TAG, "I'm called!");
+        Log.d(TAG, "" + getPosn() + " " + getDur());
     }
 }

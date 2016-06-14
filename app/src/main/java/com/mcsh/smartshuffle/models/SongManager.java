@@ -37,6 +37,7 @@ public class SongManager {
             song.setDefaultLikeness();
             orma.insertIntoSong(song);
         }
+        song.id = id;
         return song;
     }
 }
