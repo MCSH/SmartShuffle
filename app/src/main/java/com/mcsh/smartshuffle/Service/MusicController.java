@@ -1,4 +1,4 @@
-package com.mcsh.smartshuffle.deprecate;
+package com.mcsh.smartshuffle.Service;
 
 import android.content.Context;
 import android.widget.MediaController;

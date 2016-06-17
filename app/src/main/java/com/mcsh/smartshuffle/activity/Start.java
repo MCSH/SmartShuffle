@@ -63,7 +63,7 @@ public class Start extends AppCompatActivity {
                 String artist = musicCursor.getString(artistColumn);
                 String album = musicCursor.getString(albumColumn);
                 String genre = "";
-                songList.add(SongManager.getDefault(this).getOrCreate(id, title, artist, album, genre));
+                songList.add(SongManager.getDefault(this).getOrCreateSong(id, title, artist, album, genre));
             }
             while (musicCursor.moveToNext());
         }
@@ -102,7 +102,7 @@ public class Start extends AppCompatActivity {
                 String artist = musicCursor.getString(artistColumn);
                 String album = musicCursor.getString(albumColumn);
                 String genre = "";
-                SongManager.getDefault(this).getOrCreate(id, title, artist, album, genre);
+                SongManager.getDefault(this).getOrCreateSong(id, title, artist, album, genre);
             }
             while (musicCursor.moveToNext());
         }

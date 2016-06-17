@@ -14,8 +14,8 @@ import android.widget.ListView;
 import android.widget.MediaController;
 
 import com.mcsh.smartshuffle.R;
-import com.mcsh.smartshuffle.deprecate.MusicController;
-import com.mcsh.smartshuffle.deprecate.MusicService;
+import com.mcsh.smartshuffle.Service.MusicController;
+import com.mcsh.smartshuffle.Service.MusicService;
 import com.mcsh.smartshuffle.models.Song;
 import com.mcsh.smartshuffle.models.SongAdapter;
 
@@ -71,7 +71,7 @@ public class ListActivity extends AppCompatActivity implements MediaController.M
 
         EventBus.getDefault().register(this);
 
-        songList = (ArrayList<Song>)EventBus.getDefault().removeStickyEvent(ArrayList.class);
+        songList = (ArrayList<Song>) EventBus.getDefault().removeStickyEvent(ArrayList.class);
         onEvent(songList);
     }
 
@@ -249,7 +249,7 @@ public class ListActivity extends AppCompatActivity implements MediaController.M
         songList = songs;
         Collections.sort(songList, new Comparator<Song>() {
             public int compare(Song a, Song b) {
-                return a.getTitle().compareTo(b.getTitle());
+                return a.title.compareTo(b.title);
             }
         });
 

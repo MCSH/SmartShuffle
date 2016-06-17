@@ -1,10 +1,10 @@
 package com.mcsh.smartshuffle.models;
 
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.github.gfx.android.orma.annotation.Column;
-import com.github.gfx.android.orma.annotation.PrimaryKey;
 import com.github.gfx.android.orma.annotation.Table;
 
 @Table
@@ -23,10 +23,12 @@ public class Song {
     @Nullable
     public String genre;
     @Column(indexed = true)
-    @Nullable
-    public int likeness;
+    public double likeness;
+    @Column(indexed = true)
+    public double totalLikeness;
 
-    public Song(){}
+    public Song() {
+    }
 
     public Song(long id, String title, String artist, String album, String genre) {
         this.id = id;
@@ -36,35 +38,11 @@ public class Song {
         this.genre = genre;
     }
 
-    public long getID() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getArtist() {
-        return artist;
-    }
-
-    public String getAlbum() {
-        return album;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public int getLikeness() {
-        return likeness;
-    }
-
-    public void setLikeness(int likeness) {
-        likeness = likeness;
-    }
-
-    public void setDefaultLikeness() {
-        likeness = 50;
+    public double calculateLikeness(Context context) {
+        totalLikeness = 1 / 4 * likeness;
+        totalLikeness += 1 / 4 * SongManager.getDefault(context).getOrCreateAlbum(album).likeness;
+        totalLikeness += 1 / 4 * SongManager.getDefault(context).getOrCreateArtist(artist).likeness;
+        totalLikeness += 1 / 4 * SongManager.getDefault(context).getOrCreateGenre(genre).likeness;
+        return totalLikeness;
     }
 }
