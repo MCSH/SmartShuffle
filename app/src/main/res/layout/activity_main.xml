@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="#FF330000"
-    tools:context=".MainActivity" >
+    tools:context=".deprecate.MainActivity" >
 
     <ListView
         android:id="@+id/song_list"
