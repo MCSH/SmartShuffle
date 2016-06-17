@@ -3,6 +3,7 @@ package com.mcsh.smartshuffle.models;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.github.gfx.android.orma.annotation.Column;
 import com.github.gfx.android.orma.annotation.Table;
@@ -39,10 +40,16 @@ public class Song {
     }
 
     public double calculateLikeness(Context context) {
-        totalLikeness = 1 / 4 * likeness;
-        totalLikeness += 1 / 4 * SongManager.getDefault(context).getOrCreateAlbum(album).likeness;
-        totalLikeness += 1 / 4 * SongManager.getDefault(context).getOrCreateArtist(artist).likeness;
-        totalLikeness += 1 / 4 * SongManager.getDefault(context).getOrCreateGenre(genre).likeness;
+
+        totalLikeness = 1.0 / 4 * (likeness +
+                SongManager.getDefault(context).getOrCreateAlbum(album).likeness +
+                SongManager.getDefault(context).getOrCreateArtist(artist).likeness +
+                SongManager.getDefault(context).getOrCreateGenre(genre).likeness);
+
+        Log.d("PLAYER", "" + totalLikeness + " " + likeness + " " +
+                SongManager.getDefault(context).getOrCreateAlbum(album).likeness + " " +
+                SongManager.getDefault(context).getOrCreateArtist(artist).likeness + " " +
+                SongManager.getDefault(context).getOrCreateGenre(genre).likeness);
         return totalLikeness;
     }
 }

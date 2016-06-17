@@ -110,8 +110,8 @@ public class Start extends AppCompatActivity {
 
         ArrayList<Song> songList = new ArrayList();
         OrmaDatabase orma = SongManager.getOrma(this);
-        Song_Selector selector = orma.selectFromSong().orderByLikenessDesc();
-        for (int i = 0; i < 10; i++) {
+        Song_Selector selector = orma.selectFromSong().orderByTotalLikenessDesc().limit(20);
+        for (int i = 0; i < 20; i++) {
             Song song = selector.getOrNull(i);
             if(song != null)
                 songList.add(song);
