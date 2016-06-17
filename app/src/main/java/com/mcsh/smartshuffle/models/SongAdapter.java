@@ -1,5 +1,5 @@
 package com.mcsh.smartshuffle.models;
-import java.util.ArrayList;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mcsh.smartshuffle.R;
-import com.mcsh.smartshuffle.models.Song;
+
+import java.util.ArrayList;
 
 
 public class SongAdapter extends BaseAdapter {
@@ -51,9 +52,9 @@ public class SongAdapter extends BaseAdapter {
         //get song using position
         Song currSong = songs.get(position);
         //get title and artist strings
-        songView.setText(currSong.getTitle());
-        artistView.setText(currSong.getArtist());
-        albumView.setText(currSong.getAlbum());
+        songView.setText(currSong.title);
+        artistView.setText(currSong.artist);
+        albumView.setText(currSong.album);
         //set position as tag
         songLay.setTag(position);
         return songLay;

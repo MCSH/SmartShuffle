@@ -1,10 +1,11 @@
 package com.mcsh.smartshuffle.models;
 
 
+import android.content.Context;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.github.gfx.android.orma.annotation.Column;
-import com.github.gfx.android.orma.annotation.PrimaryKey;
 import com.github.gfx.android.orma.annotation.Table;
 
 @Table
@@ -23,10 +24,12 @@ public class Song {
     @Nullable
     public String genre;
     @Column(indexed = true)
-    @Nullable
-    public int likeness;
+    public double likeness;
+    @Column(indexed = true)
+    public double totalLikeness;
 
-    public Song(){}
+    public Song() {
+    }
 
     public Song(long id, String title, String artist, String album, String genre) {
         this.id = id;
@@ -36,35 +39,17 @@ public class Song {
         this.genre = genre;
     }
 
-    public long getID() {
-        return id;
-    }
+    public double calculateLikeness(Context context) {
 
-    public String getTitle() {
-        return title;
-    }
+        totalLikeness = 1.0 / 4 * (likeness +
+                SongManager.getDefault(context).getOrCreateAlbum(album).likeness +
+                SongManager.getDefault(context).getOrCreateArtist(artist).likeness +
+                SongManager.getDefault(context).getOrCreateGenre(genre).likeness);
 
-    public String getArtist() {
-        return artist;
-    }
-
-    public String getAlbum() {
-        return album;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public int getLikeness() {
-        return likeness;
-    }
-
-    public void setLikeness(int likeness) {
-        likeness = likeness;
-    }
-
-    public void setDefaultLikeness() {
-        likeness = 50;
+        Log.d("PLAYER", "" + totalLikeness + " " + likeness + " " +
+                SongManager.getDefault(context).getOrCreateAlbum(album).likeness + " " +
+                SongManager.getDefault(context).getOrCreateArtist(artist).likeness + " " +
+                SongManager.getDefault(context).getOrCreateGenre(genre).likeness);
+        return totalLikeness;
     }
 }

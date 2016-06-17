@@ -1,4 +1,4 @@
-package com.mcsh.smartshuffle.deprecate;
+package com.mcsh.smartshuffle.Service;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -56,8 +56,7 @@ public class MusicService extends Service implements
     }
 
     public void setShuffle() {
-        if (shuffle) shuffle = false;
-        else shuffle = true;
+        shuffle = !shuffle;
     }
 
     @Override
@@ -105,10 +104,10 @@ public class MusicService extends Service implements
         Song playSong = songs.get(songPosn);
 
         //Set song title
-        songTitle = playSong.getTitle();
+        songTitle = playSong.title;
 
         //get id
-        long currSong = playSong.getID();
+        long currSong = playSong.id;
         //set uri
         Uri trackUri = ContentUris.withAppendedId(
                 android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
