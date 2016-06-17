@@ -1,7 +1,7 @@
 package com.mcsh.smartshuffle.deprecate;
 
-import java.util.ArrayList;
-
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ContentUris;
 import android.content.Intent;
@@ -13,33 +13,29 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.util.Log;
 
-import java.util.Random;
-
-import android.app.Notification;
-import android.app.PendingIntent;
-
 import com.mcsh.smartshuffle.R;
 import com.mcsh.smartshuffle.activity.ListActivity;
 import com.mcsh.smartshuffle.models.Song;
+import com.mcsh.smartshuffle.models.SongManager;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class MusicService extends Service implements
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
         MediaPlayer.OnCompletionListener {
 
     private static final String TAG = "PLAYER";
+    private static final int NOTIFY_ID = 1;
+    private final IBinder musicBind = new MusicBinder();
     //media player
     private MediaPlayer player;
     //song list
     private ArrayList<Song> songs;
     //current position
     private int songPosn;
-
-    private final IBinder musicBind = new MusicBinder();
-
-    private String songTitle="";
-    private static final int NOTIFY_ID=1;
-
-    private boolean shuffle=false;
+    private String songTitle = "";
+    private boolean shuffle = false;
     private Random rand;
 
     public void onCreate() {
@@ -51,7 +47,7 @@ public class MusicService extends Service implements
         player = new MediaPlayer();
         initMusicPlayer();
 
-        rand=new Random();
+        rand = new Random();
     }
 
     @Override
@@ -59,9 +55,9 @@ public class MusicService extends Service implements
         return musicBind;
     }
 
-    public void setShuffle(){
-        if(shuffle) shuffle=false;
-        else shuffle=true;
+    public void setShuffle() {
+        if (shuffle) shuffle = false;
+        else shuffle = true;
     }
 
     @Override
@@ -89,18 +85,12 @@ public class MusicService extends Service implements
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        if(player.getCurrentPosition()==0){
+        if (player.getCurrentPosition() == 0) {
             //mp.reset();
             playNext();
         } else {
             //mp.reset();
             playNext();
-        }
-    }
-
-    public class MusicBinder extends Binder {
-        public MusicService getService() {
-            return MusicService.this;
         }
     }
 
@@ -115,7 +105,7 @@ public class MusicService extends Service implements
         Song playSong = songs.get(songPosn);
 
         //Set song title
-        songTitle=playSong.getTitle();
+        songTitle = playSong.getTitle();
 
         //get id
         long currSong = playSong.getID();
@@ -139,17 +129,16 @@ public class MusicService extends Service implements
         playSong();
     }
 
-    public void playNext(){
-        if(shuffle){
+    public void playNext() {
+        if (shuffle) {
             int newSong = songPosn;
-            while(newSong==songPosn){
-                newSong=rand.nextInt(songs.size());
+            while (newSong == songPosn) {
+                newSong = rand.nextInt(songs.size());
             }
-            songPosn=newSong;
-        }
-        else{
+            songPosn = newSong;
+        } else {
             songPosn++;
-            if(songPosn ==songs.size()) songPosn=0;
+            if (songPosn == songs.size()) songPosn = 0;
         }
         playSong();
     }
@@ -177,7 +166,7 @@ public class MusicService extends Service implements
                 .setTicker(songTitle)
                 .setOngoing(true)
                 .setContentTitle("Playing")
-        .setContentText(songTitle);
+                .setContentText(songTitle);
         Notification not = builder.build();
 
         startForeground(NOTIFY_ID, not);
@@ -216,9 +205,17 @@ public class MusicService extends Service implements
         stopForeground(true);
     }
 
-    public void calculate(){
+    public void calculate() {
         //TODO
         Log.d(TAG, "I'm called!");
         Log.d(TAG, "" + getPosn() + " " + getDur());
+        SongManager.getDefault(getApplicationContext()).songSkipped(songs.get(songPosn),
+                getPosn() / (float) getDur());
+    }
+
+    public class MusicBinder extends Binder {
+        public MusicService getService() {
+            return MusicService.this;
+        }
     }
 }

@@ -9,7 +9,7 @@ import com.github.gfx.android.orma.annotation.Table;
 
 @Table
 public class Song {
-    @PrimaryKey
+    @Column(indexed = true)
     public long id;
     @Column(indexed = true)
     public String title;
@@ -22,7 +22,7 @@ public class Song {
     @Column(indexed = true)
     @Nullable
     public String genre;
-    @Column
+    @Column(indexed = true)
     @Nullable
     public int likeness;
 

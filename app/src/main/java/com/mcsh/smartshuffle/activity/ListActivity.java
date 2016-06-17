@@ -259,11 +259,4 @@ public class ListActivity extends AppCompatActivity implements MediaController.M
         setController();
     }
 
-    @Subscribe
-    public void teeeest(Object o){
-        Log.d(TAG, "I recieved this!");
-    }
-
-
-
 }
